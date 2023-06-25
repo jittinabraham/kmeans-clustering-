@@ -1,6 +1,6 @@
 clear all
 close all
-Im = imread('robin.png');
+Im = imread('strawberry.jpg');
 Im=imresize(Im,0.5);
 
 Im=im2double(Im);

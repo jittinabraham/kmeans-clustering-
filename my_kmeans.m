@@ -1,12 +1,4 @@
-clear all
-close all
-Im = imread('strawberry.jpg');
-Im=imresize(Im,0.5);
-Im=im2double(Im);
-[r,c]=size(Im(:,:,1))
-n_classes=4;
-init=1;
-%[mu, class_im] = my_kmeans( Im, n_classes, init );
+function [mu, class_im] = my_kmeans( Im, n_classes, init );
 Im=rgb2lab(Im);
 Im_A=Im(:,:,2);
 Im_B=Im(:,:,3);
@@ -56,35 +48,5 @@ while true
  n=n+1;
 end 
 round(mu);
- T1=mu(:,1);
- T2=mu(:,2);
-CA=log_DA*T1;
-CB=log_DB*T2;
-CA(end+1)=0;
-CB(end+1)=0;
-IAcls=reshape(CA,r,c);
-IBcls=reshape(CB,r,c);
-
-
-
-hold on;
-for i=1:n_classes
-   cluster_image = IAcls==mu(i,1);
-   figure();
-   hold on;
-  
-  imshow(cluster_image);
-   
-   
-    
-end
-lab=zeros(r,c,3);
-lab(:,:,2)=IAcls;
-lab(:,:,3)=IBcls;
-lab(:,:,1)=10;
-
-rgbIm_clusterd=lab2rgb(lab);
-gray_Im=rgb2gray(rgbIm_clusterd);
-imshow(rgbIm_clusterd);
-
-  
+class_im(:,:,1)=log_DA;
+class_im(:,:,2)=log_DB;
